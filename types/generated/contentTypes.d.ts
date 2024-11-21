@@ -472,9 +472,17 @@ export interface ApiGeneralInformationGeneralInformation
           localized: true;
         };
       }>;
+    specializeInSkills: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::skill.skill'
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    workedWithSkills: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::skill.skill'
+    >;
   };
 }
 
@@ -538,7 +546,6 @@ export interface ApiSkillSkill extends Struct.CollectionTypeSchema {
       Schema.Attribute.Unique;
     projects: Schema.Attribute.Relation<'manyToMany', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
-    specializeIn: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

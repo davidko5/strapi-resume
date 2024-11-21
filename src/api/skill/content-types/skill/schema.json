@@ -28,10 +28,6 @@
       "relation": "manyToMany",
       "target": "api::project.project",
       "mappedBy": "skills"
-    },
-    "specializeIn": {
-      "type": "boolean",
-      "default": false
     }
   }
 }
