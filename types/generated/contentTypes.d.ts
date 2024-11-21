@@ -369,208 +369,209 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiAboutAbout extends Struct.SingleTypeSchema {
-  collectionName: 'abouts';
+export interface ApiExpirienceExpirience extends Struct.CollectionTypeSchema {
+  collectionName: 'expiriences';
   info: {
-    description: 'Write about yourself and the content you create';
-    displayName: 'About';
-    pluralName: 'abouts';
-    singularName: 'about';
+    displayName: 'Expirience';
+    pluralName: 'expiriences';
+    singularName: 'expirience';
   };
   options: {
-    draftAndPublish: false;
+    draftAndPublish: true;
   };
   attributes: {
-    blocks: Schema.Attribute.DynamicZone<
-      ['shared.media', 'shared.quote', 'shared.rich-text', 'shared.slider']
-    >;
+    companyName: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    from: Schema.Attribute.Date;
+    isCurrent: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::about.about'> &
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::expirience.expirience'
+    > &
       Schema.Attribute.Private;
+    position: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    title: Schema.Attribute.String;
+    skills: Schema.Attribute.Relation<'manyToMany', 'api::skill.skill'>;
+    till: Schema.Attribute.Date;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
   };
 }
 
-export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
-  collectionName: 'articles';
+export interface ApiGeneralInformationGeneralInformation
+  extends Struct.SingleTypeSchema {
+  collectionName: 'general_informations';
   info: {
-    description: 'Create your blog content';
-    displayName: 'Article';
-    pluralName: 'articles';
-    singularName: 'article';
+    displayName: 'General information';
+    pluralName: 'general-informations';
+    singularName: 'general-information';
   };
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    author: Schema.Attribute.Relation<'manyToOne', 'api::author.author'>;
-    blocks: Schema.Attribute.DynamicZone<
-      ['shared.media', 'shared.quote', 'shared.rich-text', 'shared.slider']
-    >;
-    cover: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Text &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 80;
+    email: Schema.Attribute.Email &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
       }>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::article.article'
-    > &
-      Schema.Attribute.Private;
+      'api::general-information.general-information'
+    >;
+    moreDetails: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    moreInfo: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    name: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    placeOfResidence: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    position: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'title'>;
-    title: Schema.Attribute.String;
+    shortInfo: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
   };
 }
 
-export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
-  collectionName: 'authors';
+export interface ApiProjectProject extends Struct.CollectionTypeSchema {
+  collectionName: 'projects';
   info: {
-    description: 'Create authors for your content';
-    displayName: 'Author';
-    pluralName: 'authors';
-    singularName: 'author';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
-    avatar: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    email: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::author.author'
-    > &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
-  collectionName: 'categories';
-  info: {
-    displayName: 'Category';
-    pluralName: 'categories';
-    singularName: 'category';
+    displayName: 'Project';
+    pluralName: 'projects';
+    singularName: 'project';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    category: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::restaurant.restaurant'
-    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::category.category'
+      'api::project.project'
     > &
       Schema.Attribute.Private;
-    Name: Schema.Attribute.String &
+    name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     publishedAt: Schema.Attribute.DateTime;
-    restaurants: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::restaurant.restaurant'
-    >;
+    skills: Schema.Attribute.Relation<'manyToMany', 'api::skill.skill'>;
+    thumbnail: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
   };
 }
 
-export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
-  collectionName: 'globals';
+export interface ApiSkillSkill extends Struct.CollectionTypeSchema {
+  collectionName: 'skills';
   info: {
-    description: 'Define global settings';
-    displayName: 'Global';
-    pluralName: 'globals';
-    singularName: 'global';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    defaultSeo: Schema.Attribute.Component<'shared.seo', false>;
-    favicon: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::global.global'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    siteDescription: Schema.Attribute.Text & Schema.Attribute.Required;
-    siteName: Schema.Attribute.String & Schema.Attribute.Required;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiRestaurantRestaurant extends Struct.CollectionTypeSchema {
-  collectionName: 'restaurants';
-  info: {
-    displayName: 'Restaurant';
-    pluralName: 'restaurants';
-    singularName: 'restaurant';
+    description: '';
+    displayName: 'Skill';
+    pluralName: 'skills';
+    singularName: 'skill';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    categories: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::category.category'
-    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Description: Schema.Attribute.Blocks;
+    expiriences: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::expirience.expirience'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::restaurant.restaurant'
-    > &
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::skill.skill'> &
       Schema.Attribute.Private;
-    Name: Schema.Attribute.String &
+    name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
+    projects: Schema.Attribute.Relation<'manyToMany', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSocialMediaLinkSocialMediaLink
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'social_media_links';
+  info: {
+    description: '';
+    displayName: 'Social media link';
+    pluralName: 'social-media-links';
+    singularName: 'social-media-link';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::social-media-link.social-media-link'
+    > &
+      Schema.Attribute.Private;
+    platformName: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    url: Schema.Attribute.String;
   };
 }
 
@@ -1079,12 +1080,11 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::about.about': ApiAboutAbout;
-      'api::article.article': ApiArticleArticle;
-      'api::author.author': ApiAuthorAuthor;
-      'api::category.category': ApiCategoryCategory;
-      'api::global.global': ApiGlobalGlobal;
-      'api::restaurant.restaurant': ApiRestaurantRestaurant;
+      'api::expirience.expirience': ApiExpirienceExpirience;
+      'api::general-information.general-information': ApiGeneralInformationGeneralInformation;
+      'api::project.project': ApiProjectProject;
+      'api::skill.skill': ApiSkillSkill;
+      'api::social-media-link.social-media-link': ApiSocialMediaLinkSocialMediaLink;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
