@@ -407,6 +407,7 @@ export interface ApiGeneralInformationGeneralInformation
   extends Struct.SingleTypeSchema {
   collectionName: 'general_informations';
   info: {
+    description: '';
     displayName: 'General information';
     pluralName: 'general-informations';
     singularName: 'general-information';
@@ -434,13 +435,13 @@ export interface ApiGeneralInformationGeneralInformation
       'oneToMany',
       'api::general-information.general-information'
     >;
-    moreDetails: Schema.Attribute.Text &
+    mainDetailsInfo: Schema.Attribute.Text &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
       }>;
-    moreInfo: Schema.Attribute.Text &
+    mainShortInfo: Schema.Attribute.Text &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -465,7 +466,7 @@ export interface ApiGeneralInformationGeneralInformation
         };
       }>;
     publishedAt: Schema.Attribute.DateTime;
-    shortInfo: Schema.Attribute.Text &
+    sideShortInfo: Schema.Attribute.Text &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -537,6 +538,7 @@ export interface ApiSkillSkill extends Struct.CollectionTypeSchema {
       Schema.Attribute.Unique;
     projects: Schema.Attribute.Relation<'manyToMany', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
+    specializeIn: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

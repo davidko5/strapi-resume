@@ -4,7 +4,8 @@
   "info": {
     "singularName": "general-information",
     "pluralName": "general-informations",
-    "displayName": "General information"
+    "displayName": "General information",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -31,7 +32,7 @@
       },
       "type": "string"
     },
-    "shortInfo": {
+    "sideShortInfo": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -39,7 +40,7 @@
       },
       "type": "text"
     },
-    "moreDetails": {
+    "mainShortInfo": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -63,7 +64,7 @@
       },
       "type": "string"
     },
-    "moreInfo": {
+    "mainDetailsInfo": {
       "pluginOptions": {
         "i18n": {
           "localized": true
