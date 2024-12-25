@@ -12,22 +12,10 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "expiriences": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::expirience.expirience",
-      "mappedBy": "skills"
-    },
     "name": {
       "type": "string",
       "required": true,
       "unique": true
-    },
-    "projects": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::project.project",
-      "mappedBy": "skills"
     }
   }
 }

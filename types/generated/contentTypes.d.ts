@@ -369,13 +369,13 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiExpirienceExpirience extends Struct.CollectionTypeSchema {
-  collectionName: 'expiriences';
+export interface ApiExperienceExperience extends Struct.CollectionTypeSchema {
+  collectionName: 'experiences';
   info: {
     description: '';
     displayName: 'Experience';
-    pluralName: 'expiriences';
-    singularName: 'expirience';
+    pluralName: 'experiences';
+    singularName: 'experience';
   };
   options: {
     draftAndPublish: true;
@@ -396,7 +396,6 @@ export interface ApiExpirienceExpirience extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text &
-      Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -413,12 +412,11 @@ export interface ApiExpirienceExpirience extends Struct.CollectionTypeSchema {
         i18n: {
           localized: true;
         };
-      }> &
-      Schema.Attribute.DefaultTo<false>;
+      }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::expirience.expirience'
+      'api::experience.experience'
     >;
     position: Schema.Attribute.String &
       Schema.Attribute.SetPluginOptions<{
@@ -427,7 +425,7 @@ export interface ApiExpirienceExpirience extends Struct.CollectionTypeSchema {
         };
       }>;
     publishedAt: Schema.Attribute.DateTime;
-    skills: Schema.Attribute.Relation<'manyToMany', 'api::skill.skill'>;
+    skills: Schema.Attribute.Relation<'oneToMany', 'api::skill.skill'>;
     till: Schema.Attribute.Date &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -564,7 +562,7 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
         };
       }>;
     publishedAt: Schema.Attribute.DateTime;
-    skills: Schema.Attribute.Relation<'manyToMany', 'api::skill.skill'>;
+    skills: Schema.Attribute.Relation<'oneToMany', 'api::skill.skill'>;
     thumbnail: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     > &
@@ -594,17 +592,12 @@ export interface ApiSkillSkill extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    expiriences: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::expirience.expirience'
-    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::skill.skill'> &
       Schema.Attribute.Private;
     name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
-    projects: Schema.Attribute.Relation<'manyToMany', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1162,7 +1155,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::expirience.expirience': ApiExpirienceExpirience;
+      'api::experience.experience': ApiExperienceExperience;
       'api::general-information.general-information': ApiGeneralInformationGeneralInformation;
       'api::project.project': ApiProjectProject;
       'api::skill.skill': ApiSkillSkill;

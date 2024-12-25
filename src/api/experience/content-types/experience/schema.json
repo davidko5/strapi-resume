@@ -1,9 +1,9 @@
 {
   "kind": "collectionType",
-  "collectionName": "expiriences",
+  "collectionName": "experiences",
   "info": {
-    "singularName": "expirience",
-    "pluralName": "expiriences",
+    "singularName": "experience",
+    "pluralName": "experiences",
     "displayName": "Experience",
     "description": ""
   },
@@ -17,60 +17,58 @@
   },
   "attributes": {
     "companyName": {
-      "type": "string",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "type": "string",
+      "required": false
     },
     "position": {
-      "type": "string",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "type": "string"
     },
     "from": {
-      "type": "date",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "type": "date"
     },
     "till": {
-      "type": "date",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "type": "date"
     },
     "isCurrent": {
-      "type": "boolean",
-      "default": false,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "type": "boolean"
     },
     "description": {
-      "type": "text",
-      "required": true,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "type": "text"
     },
     "skills": {
       "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::skill.skill",
-      "inversedBy": "expiriences"
+      "relation": "oneToMany",
+      "target": "api::skill.skill"
     }
   }
 }
