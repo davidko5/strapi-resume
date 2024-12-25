@@ -373,7 +373,7 @@ export interface ApiExpirienceExpirience extends Struct.CollectionTypeSchema {
   collectionName: 'expiriences';
   info: {
     description: '';
-    displayName: 'Expirience';
+    displayName: 'Experience';
     pluralName: 'expiriences';
     singularName: 'expirience';
   };
