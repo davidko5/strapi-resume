@@ -501,6 +501,15 @@ export interface ApiGeneralInformationGeneralInformation
         };
       }>;
     publishedAt: Schema.Attribute.DateTime;
+    resumeLink: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     sideShortInfo: Schema.Attribute.Text &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
