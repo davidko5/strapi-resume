@@ -43,7 +43,7 @@
     "thumbnail": {
       "type": "media",
       "multiple": false,
-      "required": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files",
@@ -62,7 +62,8 @@
           "localized": true
         }
       },
-      "type": "date"
+      "type": "date",
+      "required": true
     }
   }
 }
