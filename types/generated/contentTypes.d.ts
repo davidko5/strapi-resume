@@ -577,6 +577,12 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    projectUrl: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     publishedAt: Schema.Attribute.DateTime;
     skills: Schema.Attribute.Relation<'oneToMany', 'api::skill.skill'>;
     thumbnail: Schema.Attribute.Media<
